@@ -1,12 +1,15 @@
-# Project Title
-Insert the name of your project
+# Look at the sky
 
 ## Authors
-- Insert main author name, surname, github account
-- Insert other author(s) name, surname, github account (one per list element)
+- Mostafa Elshamy, https://github.com/melhosseiny
 
 ## Description
-Insert a description containing about 100 to 150 words, including your motivation and the meaning behind your idea and execution. The Judges will be keen to know how your idea pushes the boundaries of code and technology. 
+
+A piece that explores our quest for space exploration, and our contradictory desire to encounter something that is both alien and ethereal.
+
+Visitors are invited to gaze at blank displays with attached eye trackers, seeking the gaze of another otherworldly being. Visitors are made aware of catching another's gaze by faint static and luminescence that grows in intensity and beauty as they steadily and intently gaze at it.
+
+The intention is to reimagine our existence as beings that transcended matter but are still able to communicate in the most basic way. The project aims to understand, auralize and visualize this transient connection.
 
 ## Link to Prototype
 NOTE: If your project lives online you can add one or more links here. Make sure you have a stable version of your project running before linking it.
