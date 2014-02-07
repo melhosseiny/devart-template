@@ -2,9 +2,9 @@ Here's a brief look at my thought process as I formed the concept.
 
 I knew I wanted to build something with eye trackers. I was also interested in the philosophy of space exploration. I started to draw on projects that shaped my own ideas about the subject, beginning with the "Star Gate" sequence from *2001: A Space Odyssey*.
 
-![Star Gaze sequence](http://upload.wikimedia.org/wikipedia/en/8/89/Star_Gate.JPG)
+<!-- ![Star Gaze sequence](http://upload.wikimedia.org/wikipedia/en/8/89/Star_Gate.JPG)
 
-Source: [Wikipedia](http://en.wikipedia.org/wiki/2001:_A_Space_Odyssey_(film))
+Source: [Wikipedia](http://en.wikipedia.org/wiki/2001:_A_Space_Odyssey_(film)) -->
 
 > Bowman is drawn into a stargate. He is taken into another dimension of time and space, into the presence of godlike entities who have transcended matter and who are now creatures of pure energy. &mdash; Stanley Kubrick
 
@@ -20,9 +20,9 @@ This was going to be the project's *theme*: I was not only exploring our desire 
 
 > It is possible that the appearance of mutual gaze, and of shared attentivenes, marks the beginning of 'inter-subjectivity', i.e. awareness of the thoughts or intentions of another. &mdash; Gaze and Mutual Gaze, Argyle and Cook
 
-![Gaze and Mutual Gaze Book Cover](../project_images/gaze-and-mutual-gaze.jpg?raw=true "Gaze and Mutual Gaze Book Cover")
+<!-- ![Gaze and Mutual Gaze Book Cover](../project_images/gaze-and-mutual-gaze.jpg?raw=true "Gaze and Mutual Gaze Book Cover")
 
-Source: [Amazon](http://www.amazon.com/Gaze-Mutual-Michael-Argyle/dp/0521208653)
+Source: [Amazon](http://www.amazon.com/Gaze-Mutual-Michael-Argyle/dp/0521208653) -->
 
 Eye tracking became a core dynamic of the experience, giving agency to the visitor and realism to the gaze behavior of the being looking back.
 
