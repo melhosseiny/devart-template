@@ -1,6 +1,6 @@
 Here's a brief look at my thought process as I formed the concept.
 
-![Stunned Bowman](../project_images/stargate.jpg?raw=true "Stunned Bowman")
+![Stunned Bowman](../project_images/eye.jpg?raw=true "Stunned Bowman")
 
 Source: Screenshot from 2001: A Space Odyssey (fair use)
 
