@@ -22,7 +22,7 @@ Using existing eye tracking data, I will employ machine learning techniques to g
 
 ## Front-end
 
-I'm considering [Dart](https://www.dartlang.org/) and [AngularDart](https://angulardart.org/) for the OO/libaries features. I enjoy [AngularJS](http://angularjs.org/) very much and was grateful that there was a Dart port. I haven't used Dart before so I'm not sure how it will be integrated with Node.js and if this means that Node.js will have to be replaced by server-side Dart.
+I'm considering [Dart](https://www.dartlang.org/) and [AngularDart](https://angulardart.org/) for the OO/libraries features. I enjoy [AngularJS](http://angularjs.org/) very much and was grateful that there was a Dart port. I haven't used Dart before so I'm not sure how it will be integrated with Node.js and if this means that Node.js will have to be replaced by server-side Dart.
 
 ## Audio/Visual
 
