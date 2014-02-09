@@ -11,8 +11,6 @@ Visitors are invited to gaze at blank displays with attached eye trackers, seeki
 
 The intention is to reimagine our existence as beings that transcended matter but are still able to communicate in a primitive way. The project aims to understand, auralize and visualize this transient connection.
 
-Cover image source: [NASA](http://grin.hq.nasa.gov/ABSTRACTS/GPN-2000-000964.html)
-
 <!--## Link to Prototype
 NOTE: If your project lives online you can add one or more links here. Make sure you have a stable version of your project running before linking it.
 
