@@ -8,9 +8,9 @@ Some early thoughts on how I'm going to build this.
 
 I can probably use the relatively inexpensive Tobii X2-30 eye trackers since I don't need perfect accuracy. It is not clear at this point if the extraterrestrials will be simulated or if they will be other visitors, but to get development going on an early prototype I will assume a single display with an attached Tobii X2-30 eye tracker and a simulated extraterrestrial inhabiting that setup. The eye tracker software will run on a computer connected to the eye tracker. 
 
-![Tobii X2](../project_images/setup.jpg?raw=true "Tobii X2")
+![Tobii X2](../project_images/x2.jpg?raw=true "Tobii X2")
 
-Source: [Tobii X2 Eye Tracker Installation and Configuration](http://www.youtube.com/watch?v=KxK1vbBDNdQ)
+Source: [Screenshot from Tobii Research & Analysis Youtube Channel](http://www.youtube.com/user/TobiiEyeTracking?feature=watch)
 
 ## Bare-bones generative model of gaze behavior
 
