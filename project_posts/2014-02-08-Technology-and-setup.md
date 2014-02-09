@@ -2,7 +2,7 @@ Some early thoughts on how I'm going to build this.
 
 ## Setup
 
-![Setup](../project_images/stargate.jpg?raw=true "Setup")
+![Setup](../project_images/setup.jpg?raw=true "Setup")
 
 ## Tobii X2-30
 
