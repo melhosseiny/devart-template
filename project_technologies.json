@@ -1,15 +1,15 @@
 {
     "technologies": {
         "apis": [
-            "Websockets"
+            "websockets"
         ],
         "platforms": [
-            "OS X"
+            "osx"
         ],
         "toolkits": [
-            "Node.js",
-            "Three.js",
-            "AngularJS"
+            "nodejs",
+            "three.js",
+            "angularJS"
         ]
     },
     "themes": [
