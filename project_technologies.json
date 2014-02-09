@@ -1,10 +1,10 @@
 {
     "technologies": {
         "apis": [
-            "insert apis"
+            "Websockets"
         ],
         "platforms": [
-            "Google App Engine"
+            "OS X"
         ],
         "toolkits": [
             "Node.js",
