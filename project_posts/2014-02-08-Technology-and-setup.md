@@ -8,6 +8,10 @@ Some early thoughts on how I'm going to build this.
 
 I can probably use the relatively inexpensive Tobii X2-30 eye trackers since I don't need perfect accuracy. It is not clear at this point if the extraterrestrials will be simulated or if they will be other visitors, but to get development going on an early prototype I will assume a single display with an attached Tobii X2-30 eye tracker and a simulated extraterrestrial inhabiting that setup. The eye tracker software will run on a computer connected to the eye tracker. 
 
+![Tobii X2](../project_images/setup.jpg?raw=true "Tobii X2")
+
+Source: [Tobii X2 Eye Tracker Installation and Configuration](http://www.youtube.com/watch?v=KxK1vbBDNdQ)
+
 ## Bare-bones generative model of gaze behavior
 
 Using existing eye tracking data, I will employ machine learning techniques to generate a generative model of realistic eye movements. I would like to use [scitkit-learn](http://scikit-learn.org) for this. I did machine learning with [Weka](http://www.cs.waikato.ac.nz/ml/weka/) previously but since the eye tracking software is written in Python, it seems like a good idea to use Python for the generative model.
