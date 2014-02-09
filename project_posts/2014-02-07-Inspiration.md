@@ -27,5 +27,3 @@ This was going to be the project's *theme*: I was not only exploring our desire 
 ![Gaze and Mutual Gaze Book](../project_images/gaze-and-mutual-gaze.jpg?raw=true "Gaze and Mutual Gaze Book")
 
 Eye tracking became a core dynamic of the experience, giving agency to the visitor and realism to the gaze behavior of the being looking back.
-
-<!-- https://www.youtube.com/watch?v=30yGOxJJ2PQ -->
