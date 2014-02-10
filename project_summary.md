@@ -1,4 +1,4 @@
-# Look at the sky
+# Portal
 
 ## Authors
 - Mostafa Elshamy, https://github.com/melhosseiny
@@ -7,9 +7,9 @@
 
 A piece that explores our quest for space exploration, and our contradictory desire to encounter something that is both alien and ethereal.
 
-Visitors are invited to gaze at blank displays with attached eye trackers, seeking the gaze of otherworldly beings. Visitors are made aware of catching another's gaze by faint static and luminescence that grows in intensity and beauty as they steadily and intently gaze at it.
+Visitors are invited to gaze at blank displays with attached eye trackers, seeking the gaze of imaginary beings. Visitors are made aware of eye contact by faint static and luminescence that grows in intensity and beauty as they steadily and intently gaze at it.
 
-The intention is to reimagine our existence as beings that transcended matter but are still able to communicate in a primitive way. The project aims to understand, auralize and visualize this transient connection.
+The intention is to reimagine our existence as beings that transcended matter but are still able to communicate. The project aims to understand, auralize and visualize this transient connection.
 
 <!--## Link to Prototype
 NOTE: If your project lives online you can add one or more links here. Make sure you have a stable version of your project running before linking it.
