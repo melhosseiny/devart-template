@@ -2,14 +2,14 @@
 
 ## Authors
 - Mostafa Elshamy, https://github.com/melhosseiny
-
+  
 ## Description
 
-A piece that explores our quest for space exploration, and our contradictory desire to encounter something that is both alien and ethereal.
+Why do we explore space and try to find meaning in the sky? What are we trying to find? What if what we’re looking for starts looking back at us?
 
-Visitors are invited to gaze at blank displays with attached eye trackers, seeking the gaze of imaginary beings. Visitors are made aware of eye contact by faint static and luminescence that grows in intensity and beauty as they steadily and intently gaze at it.
+Visitors are invited to gaze at a blank display with an attached eye tracker. It is like a portal to other worlds. Using a small control knob, they can adjust the portal to receive gaze from different points in spacetime.
 
-The intention is to reimagine our existence as beings that transcended matter but are still able to communicate. The project aims to understand, auralize and visualize this transient connection.
+It is blocked so that no one can enter but if two beings looking from both ends make eye contact, they can feel the presence of one another. They can hear faint static and light that grows in intensity and beauty as they keep looking.
 
 <!--## Link to Prototype
 NOTE: If your project lives online you can add one or more links here. Make sure you have a stable version of your project running before linking it.
