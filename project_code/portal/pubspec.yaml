@@ -1,0 +1,7 @@
+name: portal
+description: A sample web application
+dependencies:
+  browser: any
+  three:
+    git: git@github.com:threeDart/three.dart.git
+  json_object: any
