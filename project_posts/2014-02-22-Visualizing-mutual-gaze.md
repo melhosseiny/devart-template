@@ -1,4 +1,4 @@
-Using a big dataset seems like a good counterbalance to my limited experience with 3D graphics and WebGL. After reading about [how Michael Change created](http://www.html5rocks.com/en/tutorials/casestudies/100000stars/) the 100,000 stars project featured on the three.js homepage, I decided to use [astronexus.com](http://astronexus.com/)'s HYG database to render the nebula-like visuals. This is a dataset of 119,617 stars.
+Using a big dataset seems like a good counterbalance to my limited experience with 3D graphics and WebGL. After reading about [how Michael Chang created](http://www.html5rocks.com/en/tutorials/casestudies/100000stars/) the 100,000 stars project featured on the three.js homepage, I decided to use [astronexus.com](http://astronexus.com/)'s HYG database to render the nebula-like visuals. This is a dataset of 119,617 stars.
 
 The idea is to render every star as a particle and gradually move the camera from an extremely distant position to a closer position. I also perturb the star's position using a noise function and use the star's color index to compute the star's color (by converting from kelvin to rgb).
 
