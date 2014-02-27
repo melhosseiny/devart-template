@@ -19,7 +19,7 @@ var translating;
 var universe;
 
 var starUniforms = {
-  "color": new Uniform.color(0xffffff),
+  //"color": new Uniform.color(0xffffff),
   "cameraZ": new Uniform.float(0.0),
   "time": new Uniform.float(0.0)
 };
@@ -56,14 +56,17 @@ bv_to_rgb(bv) {
   var Z = (y == 0)? 0 : ((1 - x - y) * Y) / y;
 
   //XYZ to rgb
-  var r = 0.41847 * X - 0.15866 * Y - 0.082835 * Z;
-  var g = -0.091169 * X + 0.25243 * Y + 0.015708 * Z;
-  var b = 0.00092090 * X - 0.0025498 * Y + 0.17860 * Z;
+  var r = 3.2406 * X - 1.5372 * Y - 0.4986 * Z;
+  var g = -0.9689 * X + 1.8758 * Y + 0.0415 * Z;
+  var b = 0.0557 * X - 0.2040 * Y + 1.0570 * Z;
+
+  var gma = 0.5;
   
-  //rgb to RGB
-  var R = Math.pow(r, 1 / 2.2);
-  var G = Math.pow(g, 1 / 2.2);
-  var B = Math.pow(b, 1 / 2.2);
+  //linear RGB to sRGB
+  var R = (r <= 0.0031308)? 12.92*r : 1.055*Math.pow(r,1/gma)-0.055;
+  var G = (g <= 0.0031308)? 12.92*g : 1.055*Math.pow(g,1/gma)-0.055;
+  var B = (b <= 0.0031308)? 12.92*b : 1.055*Math.pow(b,1/gma)-0.055;
+
   return [R,G,B];
 }
 
@@ -98,6 +101,7 @@ class Camera extends PerspectiveCamera {
   dramaticEntry(delta) {
     if (target.z > 10000) {
       target.z = linearTween(delta, 500000, -10000, 2000);
+      //target.z = linearTween(delta, 20000, -1000, 2000);
     }  
   }
 }
