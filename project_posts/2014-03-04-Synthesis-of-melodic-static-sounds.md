@@ -14,11 +14,11 @@ I felt that there was a lot going on though, and decided that three notes sounde
 
 [Soundcloud: Random Octaves, Triads](https://soundcloud.com/melhosseiny/random-octaves-triads-01)
 
-![Random Octaves, Triads](../project_images/audio/synth1.png?raw=true "Random Octaves, Triads")
+![Random Octaves, Triads](../project_images/audio/synth2.png?raw=true "Random Octaves, Triads")
 
 Inspired by the [Deep Note](http://en.wikipedia.org/wiki/Deep_Note), I added more oscillators. As I went from 30 to 150 oscillators, the sound became more eerie and staticy.
 
-![30 Oscillators](../project_images/audio/synth1.png?raw=true "30 Oscillators")
+![30 Oscillators](../project_images/audio/synth3.png?raw=true "30 Oscillators")
 
 [Soundcloud: *30 Oscillators*](https://soundcloud.com/melhosseiny/30-detuned-varying-freq)
 
