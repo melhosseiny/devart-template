@@ -2,7 +2,9 @@
 
 To get started with the Web Audio API, I decided to play a simple melody: an E D B A progression with the notes E F# G B F# G A C played over it in 4/4 time. If you're familiar with music theory, you'll notice that all notes are from the E major scale. Each note is a single sine wave oscillator with an attack-delay envelope.
 
-<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/137971436%3Fsecret_token%3Ds-95aqF&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_artwork=true"></iframe>
+<audio style="height: 3.5em; vertical-align: bottom" src="http://upload.wikimedia.org/wikipedia/en/a/aa/David_Bowie_-_Heroes.ogg" controls=""></audio>
+
+https://soundcloud.com/melhosseiny/150-oscillators-01
 
 I then replaced the notes with randomly generated notes from the E major scale with each note played at a random time.
 
