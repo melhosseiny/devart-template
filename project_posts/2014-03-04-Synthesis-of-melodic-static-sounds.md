@@ -4,7 +4,9 @@ To get started with the Web Audio API, I decided to play a simple melody: an E D
 
 [Soundcloud: Simple tune](https://soundcloud.com/melhosseiny/portal-audio-1-01)
 
-I then replaced the notes with randomly generated notes from the E major scale with each note played at a random time.
+![Simple tune](../project_images/audio/synth1.png?raw=true "Simple tune")
+
+I then replaced the notes with randomly generated notes from the E major scale with each note played at a random time. The notes are random but on one bar they're constrained to be ascending notes and on the next bar they're constrained to be descending notes.
 
 [Soundcloud: Random Notes](https://soundcloud.com/melhosseiny/random-notes-01)
 
@@ -12,7 +14,11 @@ I felt that there was a lot going on though, and decided that three notes sounde
 
 [Soundcloud: Random Octaves, Triads](https://soundcloud.com/melhosseiny/random-octaves-triads-01)
 
+![Random Octaves, Triads](../project_images/audio/synth1.png?raw=true "Random Octaves, Triads")
+
 Inspired by the [Deep Note](http://en.wikipedia.org/wiki/Deep_Note), I added more oscillators. As I went from 30 to 150 oscillators, the sound became more eerie and staticy.
+
+![30 Oscillators](../project_images/audio/synth1.png?raw=true "30 Oscillators")
 
 [Soundcloud: *30 Oscillators*](https://soundcloud.com/melhosseiny/30-detuned-varying-freq)
 
