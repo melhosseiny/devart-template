@@ -16,3 +16,4 @@ pubspec.lock  // Except for application packages
 .DS_Store     // Mac
 
 *.dart.js
+*.dart.precompiled.js
