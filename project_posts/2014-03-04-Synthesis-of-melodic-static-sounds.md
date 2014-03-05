@@ -22,8 +22,6 @@ Inspired by the [Deep Note](http://en.wikipedia.org/wiki/Deep_Note), I added mor
 
 [Soundcloud: *150 Oscillators*](https://soundcloud.com/melhosseiny/150-oscillators-01)
 
-*150 Oscillators*
-
 ## Demo
 
 View in HD for best quality
