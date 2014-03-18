@@ -5,3 +5,4 @@ dependencies:
   three:
     git: git@github.com:threeDart/three.dart.git
   json_object: any
+  angular: any

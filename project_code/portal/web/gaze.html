@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html ng-app>
+  <head>
+    <title>gaze</title>
+  </head>
+ 
+  <body gaze>   
+    <p id="text">{{ctrl.gaze.data}}</p>
+    <h1>Gaze gen</h1>
+    <main>
+      <canvas id='a' width='400' height='400'></canvas>
+      <canvas id='b' width='400' height='400'></canvas>
+    </main>
+    
+    <script src="packages/shadow_dom/shadow_dom.min.js"></script>
+    <script type="application/dart" src="gaze.dart"></script>
+    <!-- for this next line to work, your pubspec.yaml file must have a dependency on 'browser' -->
+    <script src="packages/browser/dart.js"></script>
+  </body>
+</html>
