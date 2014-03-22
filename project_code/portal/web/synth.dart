@@ -129,7 +129,7 @@ makeFilter(osc) {
 }
 
 class Synth {
-  var num_of_oscillators = 150;
+  var num_of_oscillators = 30;
   var oscillators = [];
   var master_gain;
   

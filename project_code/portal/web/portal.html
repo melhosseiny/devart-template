@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 
-<html>
+<html ng-app>
   <head>
     <meta charset="utf-8">
     <title>Portal</title>
     <link rel="stylesheet" href="portal.css">
   </head>
-  <body>    
-    <div id="sample_container_id">
-      <p id="sample_text_id"></p>
-    </div>
-    
+  <body gaze>
+    <!--p id="text">{{ctrl.gaze.data}}</p-->
+    <!--p id="text">{{ctrl.distance}} {{ctrl.mutualGaze}} {{ctrl.mutualGazeDuration}}</p-->
+    <canvas id='a' width='400' height='400'></canvas>        
     <script type='x-shader/x-fragment' id='fragmentshader'>
       uniform float cameraZ;
       uniform float time;
@@ -111,7 +110,7 @@
         vec3 perturbation = vec3(snoise( vec2(position.x, time * 0.001)),
                     snoise(vec2(position.y, time * 0.001)),
                     snoise(vec2(position.z, time * 0.001)));
-        vec4 mvPosition = modelViewMatrix * vec4(position + perturbation, 1.0 );
+        vec4 mvPosition = modelViewMatrix * vec4(position + 100.0 * perturbation, 1.0 );
 
 
         gl_PointSize = 10.0 / length(mvPosition.xyz);
@@ -119,6 +118,7 @@
       }
     </script>
     
+    <script src="packages/shadow_dom/shadow_dom.min.js"></script>
     <script type="application/dart" src="portal.dart"></script>
     <script src="packages/browser/dart.js"></script>
   </body>

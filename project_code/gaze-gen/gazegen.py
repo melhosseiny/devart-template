@@ -82,6 +82,10 @@ for i in range(n_components):
 #mainSocket = SocketIO('localhost', 8080)
 ws = create_connection("ws://localhost:8080/ws")
 
+f = open('gaze.dat', 'w+')
+f.write('ts rpx rpy rpz rprx rpry rprz r3x r3y r3z r2x r2y rp rv lpx lpy lpz lprx lpry lprz l3x l3y l3z l2x l2y lp lv\n')
+wr = csv.writer(f)
+
 def generate():
     threading.Timer(30, generate).start()
     samples = model.sample(1000, random.randint(0,9999999))
@@ -90,6 +94,7 @@ def generate():
         print(sample)
         #mainSocket.emit('gaze', sample.tolist())
         ws.send(json.dumps(sample.tolist()).encode('utf-8'))
+        wr.writerow(sample.tolist())
         time.sleep(0.03)
 
 generate()
