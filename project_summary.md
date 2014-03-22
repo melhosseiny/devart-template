@@ -14,19 +14,39 @@ It is blocked so that no one can enter but if two beings looking from both ends 
 <!--## Link to Prototype
 NOTE: If your project lives online you can add one or more links here. Make sure you have a stable version of your project running before linking it.
 
-[Example Link](http://www.google.com "Example Link")
+[Example Link](http://www.google.com "Example Link")-->
 
 ## Example Code
-NOTE: Wrap your code blocks or any code citation by using ``` like the example below.
+NOTE: This is pseudocode, see below or look at the source for Dart implementation.
 ```
-function test() {
-  console.log("Printing a test");
-}
-``` -->
+THRESHOLD_MG_DURATION = 3
+
+viewport_diagonal_length = sqrt(pow(viewport_width, 2) + pow(viewport_height, 2)) // viewport_diagonal_length
+distance = human_gaze_position.distance_to(ET_gaze_position)
+mutual_gaze = 1 - distance
+
+if mutual_gaze > 0.9 // mutual gaze if within 10% of the viewport
+  if (!timer_started)
+    orientation_synth.play(delta)
+    start_delta = delta
+    timer_started = !timer_started
+  duration = delta - start_delta / 1000 // delta in milliseconds
+else
+  // reset timer
+  orientation_synth.mute(delta)
+  duration = 0
+  timer_started = !timer_started
+
+// if there's mutual gaze for more than t seconds
+if duration > THRESHOLD_MG_DURATION
+  start_sequence()
+```
 
 ## Links to External Libraries
 
  - [three.dart](http://threedart.github.io/three.dart/ "Dart port of three.js")
+ - [AngularDart](https://angulardart.org/ "Dart port of AngularJS")
+ - [scikit-learn](http://scikit-learn.org/stable/ "Machine Learning in Python")
  - [webgl-noise](https://github.com/ashima/webgl-noise "Procedural Noise Shader Routines compatible with WebGL")
 
 <!--## Images & Videos

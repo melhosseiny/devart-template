@@ -7,12 +7,15 @@
             "osx"
         ],
         "toolkits": [
-            "nodejs",
-            "three.js",
-            "angularJS"
+            "three.dart",
+            "angularDart",
+            "scikit-learn"
         ]
     },
     "themes": [
-        "insert themes"
+        "space",
+        "exploration",
+        "mutual gaze",
+        "contact"
     ]
 }

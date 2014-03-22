@@ -6,6 +6,8 @@ The previous posts focused on  creating the audiovisual sequence and generating 
 
 This post will focus on the detection of mutual gaze which in turn triggers the audiovisual sequence (the upper two panels).
 
+## Mutual Gaze Detection
+
 Here's a GIF of the mutual gaze detection algorithm,
 
 ![Mutual gaze detection algorithm](../project_images/interaction.gif?raw=true "Mutual gaze detection algorithm")
@@ -40,4 +42,8 @@ if (mutualGazeDuration > 3) {
 }
 ```
 
-The distance between the human's gaze direction and the ET's gaze direction is calculated and viewport normalized. Mutual gaze is then defined as being within 10% of the viewport size of the ET's gaze direction. The mutual gaze duration is computed in seconds and when it reaches a threshold value (a value of 3 is used here) - the audiovisual sequence starts.
+1. Calculate the distance between the human's gaze direction and the ET's gaze direction
+2. Normalize the distance relative to the viewport
+3. There's mutual gaze if the human's gaze is within 10% of the viewport size from the ET's gaze direction
+4. Compute mutual gaze duration in seconds 
+5. Start AV sequence when duration reaches a threshold value (3 here)
