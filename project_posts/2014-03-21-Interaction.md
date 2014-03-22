@@ -40,4 +40,4 @@ if (mutualGazeDuration > 3) {
 }
 ```
 
-The distance between the human's gaze direction and the ET's gaze direction is calculated and viewport normalized. Mutual gaze is then defined as being within 10% of the viewport size of the ET's gaze direction. The mutual gaze duration is computed in seconds and when in reaches a threshhold value (a value of 3 is used here) - the audiovisual sequence starts.
+The distance between the human's gaze direction and the ET's gaze direction is calculated and viewport normalized. Mutual gaze is then defined as being within 10% of the viewport size of the ET's gaze direction. The mutual gaze duration is computed in seconds and when it reaches a threshold value (a value of 3 is used here) - the audiovisual sequence starts.
