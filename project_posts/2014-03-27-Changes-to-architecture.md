@@ -1,0 +1,1 @@
+![Changes to architecture](../project_images/arch.png?raw=true "Changes to architecture")

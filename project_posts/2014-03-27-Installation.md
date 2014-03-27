@@ -1,1 +1,1 @@
-![Installation](../project_images/inst.png?raw=true "Installation")
+![Installation Illustration](../project_images/inst.png?raw=true "Installation Illustration")
