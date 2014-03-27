@@ -14,23 +14,39 @@
       uniform float cameraZ;
       uniform float time;
 
+      varying float vAlpha;
       varying float vDistance;
       varying vec3 vColor;
+      varying vec3 vShift;
+
+      float rand(vec2 co){
+        return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+      }
 
       void main() {
-        gl_FragColor = vec4(vColor,0.3);
+        vec4 color = vec4(vColor, 1.0);
+        vec4 shift = vec4(vShift, 1.0);
+        vec4 mixed = mix(color, shift, 0.9);
+        vec4 amixed = vec4(mixed.xyz, vAlpha);
+        gl_FragColor = amixed;
       }
     </script>
 
     <script type='x-shader/x-vertex' id='vertexshader'>
+      uniform float zoomSize;
+      uniform float scale;
       uniform float cameraZ;
       uniform float time;
+      uniform float alpha;
+      uniform vec3 shift;
 
       attribute float distance;
       attribute vec3 color;
     
+      varying float vAlpha;
       varying float vDistance;
       varying vec3 vColor;
+      varying vec3 vShift;
 
       //
       // Description : Array and textureless GLSL 2D simplex noise function.
@@ -106,19 +122,21 @@
       void main() {
         vDistance = distance;
         vColor = color;
+        vAlpha = alpha;
+        vShift = shift;
 
         vec3 perturbation = vec3(snoise( vec2(position.x, time * 0.001)),
                     snoise(vec2(position.y, time * 0.001)),
                     snoise(vec2(position.z, time * 0.001)));
-        vec4 mvPosition = modelViewMatrix * vec4(position + 100.0 * perturbation, 1.0 );
+        vec4 mvPosition = modelViewMatrix * vec4(position + 400.0 * perturbation, 1.0 );
 
 
-        gl_PointSize = 10.0 / length(mvPosition.xyz);
+        gl_PointSize = scale * 10.0 * zoomSize / length(mvPosition.xyz);
         gl_Position = projectionMatrix * mvPosition;
       }
     </script>
     
-    <script src="packages/shadow_dom/shadow_dom.min.js"></script>
+    <!--script src="packages/shadow_dom/shadow_dom.min.js"></script-->
     <script type="application/dart" src="portal.dart"></script>
     <script src="packages/browser/dart.js"></script>
   </body>

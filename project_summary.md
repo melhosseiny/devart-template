@@ -11,17 +11,17 @@ Visitors are invited to gaze at a blank display with an attached eye tracker. It
 
 It is blocked so that no one can enter but if two beings looking from both ends make eye contact, they can feel the presence of one another. They can hear faint static and see light that grows in intensity and beauty as they keep looking.
 
-<!--## Link to Prototype
-NOTE: If your project lives online you can add one or more links here. Make sure you have a stable version of your project running before linking it.
+## Link to Prototype
+NOTE: Use your mouse as fallback for the eye tracker.
 
-[Example Link](http://www.google.com "Example Link")-->
+[Prototype](http://portal-pt.appspot.com/ "Prototype")-->
 
 ## Example Code
-NOTE: This is pseudocode, see below or look at the source for Dart implementation.
+NOTE: This is pseudocode, see below or look at the source for the Dart implementation.
 ```
 THRESHOLD_MG_DURATION = 3
 
-viewport_diagonal_length = sqrt(pow(viewport_width, 2) + pow(viewport_height, 2)) // viewport_diagonal_length
+viewport_diagonal_length = sqrt(pow(viewport_width, 2) + pow(viewport_height, 2)) 
 distance = human_gaze_position.distance_to(ET_gaze_position)
 mutual_gaze = 1 - distance
 
@@ -42,6 +42,8 @@ if duration > THRESHOLD_MG_DURATION
   start_sequence()
 ```
 
+![Mutual gaze detection algorithm](../project_images/interaction.gif?raw=true "Mutual gaze detection algorithm")
+
 ## Links to External Libraries
 
  - [three.dart](http://threedart.github.io/three.dart/ "Dart port of three.js")
@@ -49,9 +51,8 @@ if duration > THRESHOLD_MG_DURATION
  - [scikit-learn](http://scikit-learn.org/stable/ "Machine Learning in Python")
  - [webgl-noise](https://github.com/ashima/webgl-noise "Procedural Noise Shader Routines compatible with WebGL")
 
-<!--## Images & Videos
-NOTE: For additional images you can either use a relative link to an image on this repo or an absolute link to an externally hosted image.
+## Images & Videos
 
-![Example Image](project_images/cover.jpg?raw=true "Example Image")
+https://www.youtube.com/watch?v=4RAbX9EUzQ0
 
-https://www.youtube.com/watch?v=30yGOxJJ2PQ-->
+![Looking right then up](../project_images/gazegen-lookrightup.gif?raw=true "Looking right then up")

@@ -8,8 +8,8 @@ import 'package:angular/angular.dart';
 import 'dart:async';
 
 // Temporary, please follow https://github.com/angular/angular.dart/issues/476
-@MirrorsUsed(targets: const['gaze'], override: '*')
-import 'dart:mirrors';
+//@MirrorsUsed(targets: const['gaze'], override: '*')
+//import 'dart:mirrors';
 
 void main() {
   ngBootstrap(module: new MyAppModule());
@@ -31,9 +31,12 @@ var mouse;
 var orient;
 
 var starUniforms = {
-  //"color": new Uniform.color(0xffffff),
+  "alpha": new Uniform.float(0.0),
   "cameraZ": new Uniform.float(0.0),
-  "time": new Uniform.float(0.0)
+  "time": new Uniform.float(0.0),
+  "scale": new Uniform.float(0.0),
+  "zoomSize": new Uniform.float(0.0),
+  "shift": new Uniform.color(0xffffff)
 };
 
 var starAttributes = {
@@ -100,6 +103,13 @@ limit(a, x, b) {
 
 // objects
 class Camera extends PerspectiveCamera {
+  static const E = 3000;
+  static const B = 500000;
+  static const C = -10000;
+  static const D = 2000;
+  static const TD = (((E - B) / C) * D);
+  static const XYC = E / (TD / D);
+  
   var position = new Vector3.zero();
   var target = new Vector3.zero();
   
@@ -108,14 +118,13 @@ class Camera extends PerspectiveCamera {
     target.z = position;
   }
   
-  update() => position += (target - position) * 0.125;
+  update() => position = target; //position += (target - position) * 0.125;
   
   dramaticEntry(delta) {
-    if (target.z > 10000) {
+    if (target.z > E) {
       // total duration = [(e - b) / c] * d = 98 sec
-      target.z = linearTween(delta, 500000, -10000, 2000);
-      //target.z = linearTween(delta, 20000, -1000, 2000);
       // c = e / (total duration / d) = e / 49
+      target.z = linearTween(delta, B, C, D);
       
       var vFOV = camera.fov * Math.PI / 180;        // convert vertical fov to radians
       var height = 2 * Math.tan( vFOV / 2 ) * camera.target.z; // visible height
@@ -128,9 +137,9 @@ class Camera extends PerspectiveCamera {
       projector.projectVector(vector, camera);
       
       if (!vector.x.isNaN) { 
-        target.x = linearTween(delta, 0, universe.position.x / 49, 2000);        
+        target.x = linearTween(delta, 0, universe.position.x / (TD / D), D);        
       }
-      target.y = linearTween(delta, 0, universe.position.y / 49, 2000); 
+      target.y = linearTween(delta, 0, universe.position.y / (TD / D), D); 
     }
   }
 }
@@ -159,7 +168,40 @@ class Universe extends Object3D {
   update(delta) {
     starUniforms['cameraZ'].value = camera.position.z;
     starUniforms['time'].value = delta;
+    starUniforms['zoomSize'].value = limit((camera.position.z) / Camera.B, 0, 1);
+    starUniforms['scale'].value = Math.sqrt(window.innerWidth * window.innerHeight) * 1.5;
+    var alphaTarget = (how_close > 0.99)? (1 - how_close) * 0.3 : 0.3;
+    alphaTarget = limit(alphaTarget,0.02,0.3);
+    starUniforms['alpha'].value += (alphaTarget - starUniforms['alpha'].value) * 0.125;
+    starUniforms['shift'].value = heat(how_close);
   }
+}
+
+/* COLOR */
+
+//var DIFFERENT_COLORS = [];
+var HEATMAP_COLORS = [];
+
+initColors() {
+  for (var i = 0; i < 10; i++) {
+    var h = (i * 0.618033988749895) % 1.0;
+    var s = 0.5;
+    var v = Math.sqrt(1.0 - ((i * 0.618033988749895) % 0.5));
+  
+    //DIFFERENT_COLORS.add('hsla(' + (hsl[0]*255).round().toString() + ',' + (hsl[1]*100).round().toString() + '%,' + (hsl[2]*100).round().toString() + '%,' + a.toString() + ')');
+  }
+  
+  for (var h = 0; h < 210; h++) {
+    Color c = new Color();
+    c.setHSV((209 - h) / 209, 0.5, 0.5);
+    HEATMAP_COLORS.add(c);
+  }
+}
+
+heat(rel) {
+  var d = limit(rel, 0, 1);
+  if (rel == 0) return 'rgba(0,0,0,0)';
+  return HEATMAP_COLORS[ (d * (HEATMAP_COLORS.length - 1)).round()];
 }
 
 class Star extends Vector3 {
@@ -201,7 +243,10 @@ onStarDataLoaded(String responseText) {
   init();
 }
 
+var starGeometry;
+
 init() {
+  initColors();
   scene = new Scene();
   scene.add(new AmbientLight(0x404040));
 
@@ -215,13 +260,13 @@ init() {
   renderer = new WebGLRenderer(antialias:true);
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.nodes.add(renderer.domElement);
-
+  
   camera = new Camera(35.0, window.innerWidth / window.innerHeight, 0.1, 10000000.0, 500000.0);
   scene.add(camera);
   camera.position.z = 500000.0;
   renderer.render(scene,camera);
 
-  var starGeometry = new Geometry();
+  starGeometry = new Geometry();
 
   for(var s in starData) {    
     if(s.d >= 10000000) continue;
@@ -250,66 +295,172 @@ init() {
   universe.add(starSystem);
   
   mouse = new Vector2.zero();
-  renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
+  renderer.domElement.onMouseMove.listen(onDocumentMouseMove);
   
   context = new AudioContext();
   
   lead = new Synth();
   rhythm = new Synth();
   orient = new Synth();
+  
+  _loadBuffers(context);
 }
 
 onDocumentMouseMove(event) {
-  event.preventDefault(); 
-
-  mouse.x = (event.clientX).toDouble(); 
-  mouse.y = (event.clientY).toDouble(); 
+  mouse.x = (event.client.x).toDouble();
+  mouse.y = (event.client.y).toDouble();
+  
+  // Screen to world: http://stackoverflow.com/questions/13055214
+  var vector = new Vector3(( mouse.x / window.innerWidth ) * 2 - 1, - ( mouse.y / window.innerHeight ) * 2 + 1, 0.5);
+  var projector = new Projector();
+  projector.unprojectVector(vector, camera);
+  
+  var dir = vector.sub( camera.position ).normalize();
+  var distance = - camera.position.z / dir.z;
+  if (pos != null)
+    pos += (camera.position.clone().add(dir*distance) - pos) * 0.125;
+  else
+    pos = camera.position.clone().add(dir*distance);
+  
+  if (how_close < 0.5) {
+    translating.targetPosition.x = 0.01*pos.x;
+    translating.targetPosition.y = 0.01*pos.y;
+  } else {
+    translating.targetPosition.x = 0.001*pos.x;
+    translating.targetPosition.y = 0.001*pos.y;
+  }
 }
 
 var started = false;
 var pos;
+var seqStartDelta;
 
 startSeq() {
   if (started == false) {
-    print(mouse);
-    
-    // Screen to world: http://stackoverflow.com/questions/13055214
-    var vector = new Vector3(( mouse.x / window.innerWidth ) * 2 - 1, - ( mouse.y / window.innerHeight ) * 2 + 1, 0.5);
-    var projector = new Projector();
-    projector.unprojectVector(vector, camera);
-  
-    var dir = vector.sub( camera.position ).normalize();
-    var distance = - camera.position.z / dir.z;  
-    pos = camera.position.clone().add(dir*distance);
-  
-    print(pos);
     window.animationFrame.then(render);
+    playMelody();
     playStatic();
+    universe.position.x = pos.x;
+    universe.position.y = pos.y;
     started = true;
   }
 }
 
+var how_close = 1;
 
 render(num delta) {
   camera.update();
-  camera.dramaticEntry(delta);
+  camera.dramaticEntry(delta-seqStartDelta);
  
   //rotating.update(delta);
-  universe.position.x = pos.x;
-  universe.position.y = pos.y;
-  //camera.lookAt(universe.position);
-  translating.update(delta);
-  universe.update(delta);
+
+  translating.update(delta-seqStartDelta);
+  universe.update(delta-seqStartDelta);
   
   renderer.render(scene,camera);
   
-  lead.activate(((1 - (camera.target.z / 500000)) * 100).toInt());
-  rhythm.activate(((1 - (camera.target.z / 500000)) * 100).toInt());
+  how_close = 1 - (camera.target.z / Camera.B);
+  melody_gain.gain.value = how_close * 1;
+  
+  //print(melody_gain.gain.value);
+  //lead.activate( * 100).toInt());
+  //rhythm.activate(((1 - (camera.target.z / 500000)) * 100).toInt());
+
+  lead.setMasterGain(how_close, 0);
+  rhythm.setMasterGain(how_close, 0);
   
   window.animationFrame.then(render);
 }
 
 // audio
+typedef void OnLoadCallback(List<AudioBuffer> bufferList);
+
+class BufferLoader {
+  AudioContext audioCtx;
+  List<String> urlList;
+  OnLoadCallback callback;
+  int _loadCount = 0;
+  List<AudioBuffer> _bufferList;
+
+  BufferLoader(this.audioCtx, this.urlList, this.callback) {
+    _bufferList = new List<AudioBuffer>(urlList.length);
+  }
+
+  void load() {
+    for (var i = 0; i < urlList.length; i++) {
+      _loadBuffer(urlList[i], i);
+    }
+  }
+
+  void _loadBuffer(String url, int index) {
+    // Load the buffer asynchronously.
+    var request = new HttpRequest();
+    request.open("GET", url, async: true);
+    request.responseType = "arraybuffer";
+    request.onLoad.listen((e) => _onLoad(request, url, index));
+
+    // Don't use alert in real life ;)
+    request.onError.listen((e) => window.alert("BufferLoader: XHR error"));
+
+    request.send();
+  }
+
+  void _onLoad(HttpRequest request, String url, int index) {
+    // Asynchronously decode the audio file data in request.response.
+    audioCtx.decodeAudioData(request.response).then((AudioBuffer buffer) {
+      if (buffer == null) {
+
+        // Don't use alert in real life ;)
+        window.alert("Error decoding file data: $url");
+
+        return;
+      }
+      _bufferList[index] = buffer;
+      if (++_loadCount == urlList.length) callback(_bufferList);
+    });
+  }
+}
+
+// Keep track of all loaded buffers.
+Map<String, AudioBuffer> buffers = new Map<String, AudioBuffer>();
+
+// An object to track the buffers to load "{name: path}".
+const buffersToLoad = const {
+  "space_melody": "sounds/space_melody_static.ogg"
+};
+
+// Loads all sound samples into the buffers object.
+void _loadBuffers(audioCtx) {
+  List<String> names = buffersToLoad.keys.toList();
+  List<String> paths = buffersToLoad.values.toList();
+  var bufferLoader = new BufferLoader(audioCtx, paths, (List<AudioBuffer> bufferList) {
+    for (var i = 0; i < bufferList.length; i++) {
+      AudioBuffer buffer = bufferList[i];
+      String name = names[i];
+      buffers[name] = buffer;
+    }
+  });
+  bufferLoader.load();
+}
+
+var melody_gain;
+
+void playMelody() {
+  // Create the source.
+  var _source = context.createBufferSource();
+  _source.buffer = buffers['space_melody'];
+  
+  melody_gain = context.createGain();
+  melody_gain.gain.value = 0;
+  
+  // Connect everything.
+  _source.connectNode(melody_gain);  
+  melody_gain.connectNode(context.destination);
+
+  // Play!
+  _source.start(70);
+  _source.loop = true;
+}
 
 void playStatic() {  
   var startTime = context.currentTime + 0.100;
@@ -318,31 +469,31 @@ void playStatic() {
   
   for (var bar = 0; bar < 20; bar++) {
     var time = startTime + bar * 8 * eighthNoteTime;
-    var rhythmNotes = new Scale('E').getFourRandomNotes(); 
+    var rhythmNotes = new Scale('A#').getFourRandomNotes(); 
     
     rhythm.playNote(new Note(rhythmNotes[0] + '4'), time);
-    rhythm.playNote(new Note(rhythmNotes[1] + '4'), time + 4 * eighthNoteTime);
+    //rhythm.playNote(new Note(rhythmNotes[1] + '4'), time + 4 * eighthNoteTime);
     
     if (bar.isEven) {
-      for (var note in new Scale('E').getRandomAscNotes(3)) {
+      for (var note in new Scale('A#').getRandomAscNotes(3)) {
         lead.playNote(new Note(note+getRandomInt(2,6).toString()), time + getRandomInt(0,8) * eighthNoteTime);
       }
     } else {
-      for (var note in new Scale('E').getRandomAscNotes(3)) {
+      for (var note in new Scale('A#').getRandomDscNotes(3)) {
         lead.playNote(new Note(note+getRandomInt(2,6).toString()), time + getRandomInt(0,8) * eighthNoteTime);
       }
     }
-  }  
+  } 
 }
 
 void playOrientStatic() {  
-  var startTime = context.currentTime + 0.100;
+  var startTime = context.currentTime;
   var tempo = 40; // BPM (beats per minute)
   var eighthNoteTime = (60 / tempo) / 2;
   
   var bar = 0;
   var time = startTime + bar * 8 * eighthNoteTime;
-  var rhythmNotes = new Scale('E').getFourRandomNotes(); 
+  var rhythmNotes = new Scale('A#').getFourRandomNotes(); 
   
   orient.playNote(new Note(rhythmNotes[0] + '4'), time);
   //orient.playNote(new Note(rhythmNotes[1] + '4'), time + 4 * eighthNoteTime);
@@ -356,7 +507,8 @@ class Scale {
                         'D': ['D','E','F#','G','A','B','C#'],
                         'B': ['B','C#','D#','E','F#','G#','A#'],
                         'F': ['F','G','A','A#','C','D','E'],
-                        'D#': ['D#','F','G','G#','A#','C','D']};
+                        'D#': ['D#','F','G','G#','A#','C','D'],
+                        'A#': ['A#','C','D','F#','F','G','A']};
   var name;
   
   Scale(this.name);
@@ -424,7 +576,7 @@ makeFilter(osc) {
 }
 
 class Synth {
-  var num_of_oscillators = 150;
+  var num_of_oscillators = 20;
   var oscillators = [];
   var master_gain;
   var osc_gains = [];
@@ -443,7 +595,7 @@ class Synth {
       addWobble(oscillator);
       oscillator.detune.value = getRandomInt(-20, 20);
       
-      osc_gain.gain.value = 0.3;
+      osc_gain.gain.value = 1;
       
       oscillator.connectNode(panner);
       panner.connectNode(lowpass);
@@ -457,10 +609,17 @@ class Synth {
     master_gain.connectNode(context.destination);
   }
   
+  setMasterGain(value, when) { 
+    for (var o in osc_gains) {
+      o.gain.linearRampToValueAtTime(value, when);
+    }
+    master_gain.gain.linearRampToValueAtTime(value, when);
+  }
+  
   activate(howmany) {
-    //print(howmany);
-    //print(oscillators.length);
-    //print(num_of_oscillators - oscillators.length);
+    print(howmany);
+    print(oscillators.length);
+    print(num_of_oscillators - oscillators.length);
     if (howmany > num_of_oscillators - oscillators.length && howmany < num_of_oscillators - 30) {
       oscillators[oscillators.length - 1].stop(0);
       oscillators.removeLast();
@@ -469,7 +628,7 @@ class Synth {
   
   playNote(note, when) {  
     for (var o in osc_gains) {
-      o.gain.value = 0.3;
+      o.gain.value = 1.0 * how_close;
     }
     for (var o in oscillators) {
       o.frequency.setValueAtTime(getRandomInt(note.frequency-20,note.frequency+20), when);
@@ -483,11 +642,6 @@ class Synth {
   }  
   
   mute(when) {       
-    master_gain.gain.cancelScheduledValues(when);
-    master_gain.gain.cancelScheduledValues(when + 1.0);
-    master_gain.gain.cancelScheduledValues(when + 1.0 + 1.5);
-    master_gain.gain.value = 0;
-
     for (var o in osc_gains) {
       o.gain.value = 0;
     }
@@ -618,19 +772,19 @@ class GazeCtrl {
         if (mutualGaze > 0.9) {
           if (!counterStarted) {
             startDelta = delta;
-            if (!started) playOrientStatic();
+            playOrientStatic();
             counterStarted = !counterStarted;
           }
           mutualGazeDuration = (delta - startDelta) / 1000; // in seconds
         } else {
           // reset
-          if (!started) orient.mute(delta);
+          orient.mute(delta);
           mutualGazeDuration = 0;
           counterStarted = false;
         }
-        
         // if there's mutual gaze for more than t seconds
         if (mutualGazeDuration > 3) {
+          seqStartDelta = delta;
           startSeq();
         }
 
@@ -638,10 +792,14 @@ class GazeCtrl {
         var mutualCir = new Circle(mouse.x, mouse.y, 100);
         mutualCir.render(dir.context2D, 'rgba(200,0,0,' + opacity.toString() + ')');
         
-        orient.log_master_gain_v();
+        //orient.log_master_gain_v();
       }
     }
-    window.animationFrame.then(render);
+    if (!started) window.animationFrame.then(render);
+    else {
+      dir.context2D.fillStyle = 'rgb(0,0,0)';
+      dir.context2D.fillRect(0,0,dir.context2D.canvas.width,dir.context2D.canvas.height);
+    }
   }
 }
 

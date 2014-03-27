@@ -129,7 +129,7 @@ makeFilter(osc) {
 }
 
 class Synth {
-  var num_of_oscillators = 30;
+  var num_of_oscillators = 10;
   var oscillators = [];
   var master_gain;
   
@@ -147,7 +147,7 @@ class Synth {
       addWobble(oscillator);
       oscillator.detune.value = getRandomInt(-20, 20);
       
-      osc_gain.gain.value = 0.3;
+      osc_gain.gain.value = 1.0;
       
       var type = getRandomInt(0,3);
       oscillator.type = 'triangle';
