@@ -130,8 +130,7 @@
                     snoise(vec2(position.z, time * 0.001)));
         vec4 mvPosition = modelViewMatrix * vec4(position + 400.0 * perturbation, 1.0 );
 
-
-        gl_PointSize = 5.0;
+        gl_PointSize = scale * 10.0 * zoomSize / length(mvPosition.xyz);
         gl_Position = projectionMatrix * mvPosition;
       }
     </script>

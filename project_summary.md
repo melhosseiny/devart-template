@@ -59,4 +59,8 @@ https://www.youtube.com/watch?v=4RAbX9EUzQ0
 
 ![How the visitor will interact with the portal](../project_images/storyboard.png?raw=true "How the visitor will interact with the portal")
 
+*Core Interaction*
+
 ![Looking right then up](../project_images/gazegen-lookrightup.gif?raw=true "Looking right then up")
+
+*Generating Gaze Behavior*
