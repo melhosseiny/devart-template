@@ -11,8 +11,10 @@ Visitors are invited to gaze at a blank display with an attached eye tracker. It
 
 It is blocked so that no one can enter but if two beings looking from both ends make eye contact, they can feel the presence of one another. They can hear faint static and see light that grows in intensity and beauty as they keep looking.
 
+![Installation Illustration](../project_images/inst.png?raw=true "Installation Illustration")
+
 ## Link to Prototype
-NOTE: Use your mouse as fallback for the eye tracker.
+NOTE: Use your mouse as fallback for the eye tracker. If for some reason you're having trouble running the prototype, see the youtube video below.
 
 [Prototype](http://portal-pt.appspot.com/ "Prototype")
 
@@ -54,5 +56,7 @@ if duration > THRESHOLD_MG_DURATION
 ## Images & Videos
 
 https://www.youtube.com/watch?v=4RAbX9EUzQ0
+
+![How the visitor will interact with the portal](../project_images/storyboard.png?raw=true "How the visitor will interact with the portal")
 
 ![Looking right then up](../project_images/gazegen-lookrightup.gif?raw=true "Looking right then up")
