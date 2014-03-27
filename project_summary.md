@@ -14,7 +14,7 @@ It is blocked so that no one can enter but if two beings looking from both ends 
 ## Link to Prototype
 NOTE: Use your mouse as fallback for the eye tracker.
 
-[Prototype](http://portal-pt.appspot.com/ "Prototype")-->
+[Prototype](http://portal-pt.appspot.com/ "Prototype")
 
 ## Example Code
 NOTE: This is pseudocode, see below or look at the source for the Dart implementation.
